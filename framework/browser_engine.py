@@ -10,7 +10,8 @@ logger = Logger(logger="BrowserEngine").getlog()
 
 class BrowserEngine(object):
     dir = os.path.dirname(os.path.abspath('.'))  # 注意相对路径获取方法
-    chrome_driver_path = dir + '/tools/chromedriver.exe'
+    chrome_driver_path = dir + '/tools/chromedriver'
+    firefox_driver_path = dir + '/tools/geckodriver2'
     ie_driver_path = dir + '/tools/IEDriverServer.exe'
 
     def __init__(self, driver):
@@ -31,10 +32,20 @@ class BrowserEngine(object):
         logger.info("The test server url is: %s" % url)
 
         if browser == "Firefox":
-            driver = webdriver.Firefox()
-            logger.info("Starting firefox browser.")
+            options = webdriver.FirefoxOptions()
+            options.set_headless('-headless')
+            driver = webdriver.Firefox(executable_path=self.firefox_driver_path,
+									  # firefox_profile="/Users/buxiangjie/FirefoxProfiles",
+									  # firefox_options=options,
+                                      )
+            logger.info("Starting firefox-headless browser.")
+        elif browser == "ff":
+            driver = webdriver.Firefox(executable_path=self.firefox_driver_path,
+                                       #firefox_profile="/Users/buxiangjie/FirefoxProfiles",
+                                       )
+
         elif browser == "Chrome":
-            driver = webdriver.Chrome(self.chrome_driver_path)
+            driver = webdriver.Chrome(executable_path="/Users/buxiangjie/Downloads/chromedriver")
             logger.info("Starting Chrome browser.")
         elif browser == "IE":
             driver = webdriver.Ie(self.ie_driver_path)
@@ -44,8 +55,6 @@ class BrowserEngine(object):
         logger.info("Open url: %s" % url)
         driver.maximize_window()
         logger.info("Maximize the current window.")
-        driver.implicitly_wait(10)
-        logger.info("Set implicitly wait 10 seconds.")
         return driver
 
     def quit_browser(self):
