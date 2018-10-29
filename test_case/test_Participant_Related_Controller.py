@@ -18,6 +18,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="countOrderByStatus",param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 200,"接口返回状态正确"
 
 	def test_countOrderByStatus2(self):
@@ -26,6 +28,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="countOrderByStatus",param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400,"接口返回状态正确"
 
 	def test_countOrderByStatus3(self):
@@ -33,6 +37,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="countOrderByStatus")
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400,"接口返回状态正确"
 
 	def test_getMemberInfo1(self):
@@ -43,6 +49,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="getMemberInfo",param=param)
 		print("返回信息:%s"%rep)
 		print("返回信息头:%s"%rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data']['unionid'],"oQ_Ix5mlOs_3FHBjAxEh84W1lHmU",msg="unionid正确")
@@ -55,6 +63,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="getMemberInfo", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_getMemberInfo3(self):
@@ -65,6 +75,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="getMemberInfo", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_getMemberInfo4(self):
@@ -74,6 +86,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="getMemberInfo", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_myOrderDetail1(self):
@@ -85,6 +99,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderDetail", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data']['orderNo'],"181023161406000002","orderNo正确")
@@ -98,6 +114,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderDetail", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_myOrderDetail3(self):
@@ -108,6 +126,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderDetail", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_myOrderDetail4(self):
@@ -118,6 +138,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderDetail", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data']['orderNo'],"181023161406000002","orderNo正确")
@@ -132,6 +154,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['id'], 1444, "orderid正确")
@@ -146,6 +170,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 	def test_myOrderList3(self):
@@ -159,6 +185,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['id'], 1444, "orderid正确")
@@ -174,6 +202,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['id'], 1443, "orderid正确")
@@ -189,6 +219,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['id'], 1394, "orderid正确")
@@ -204,6 +236,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['id'], 1443, "orderid正确")
@@ -219,6 +253,8 @@ class Participant_Related_Controller(unittest.TestCase):
 		rep = self.cm.Response(faceaddr="myOrderList", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 400, "接口返回状态正确"
 
 if __name__ == '__main__':
