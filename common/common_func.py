@@ -53,4 +53,28 @@ class Common():
 			self.logger.error("获取失败返回:%s"%e)
 			print(str(e))
 
+	def Get_MerchantName(self,merchant_name="merchant_name",tablename="merchant_setting",merchant_id="10115042"):
+		"""获取商户信息"""
+		host = Config().Get_Item("Database","host")
+		user = Config().Get_Item("Database","user")
+		password = Config().Get_Item("Database","password")
+		port = Config().Get_Item("Database","port")
+		db = Config().Get_Item("Database","db")
+		self.logger.info("数据库连接地址:%s;用户名:%s;密码:%s;端口号:%s;数据库名称:%s"%(host,user,password,port,db))
+		conn = pymysql.connect(host="192.168.19.219",user=user,password=password,port=4376,db=db,charset='utf8')
+		cur = conn.cursor()
+		sql = "Select %s from %s where merchant_id=%s"%(merchant_name,tablename,merchant_id)
+		self.logger.info("获取商户信息sql:%s"%sql)
+		cur.execute(sql)
+		conn.commit()
+		name = cur.fetchone()
+		self.logger.info("商户信息为:%s"%name)
+		cur.close()
+		conn.close()
+		try:
+			return name[0]
+		except Exception as e:
+			self.logger.error("获取失败返回:%s"%e)
+			print(str(e))
+
 
