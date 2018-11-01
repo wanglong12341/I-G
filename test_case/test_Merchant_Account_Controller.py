@@ -16,7 +16,7 @@ class Merchant_Account_Controller(unittest.TestCase):
 	def test_merchantAccountIncome1(self):
 		"""我的收入：正常传参"""
 		param = {
-			"merchantId":10115246
+			"merchantId":10115246,
 		}
 		rep = self.cm.Response(faceaddr="merchantAccountIncome", param=param)
 		print("返回信息:%s" % rep.text)
