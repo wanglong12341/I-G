@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 from common.common_func import Common
 from log.logger import Logger
-import unittest,json,random
+import unittest,json
 
 class Data_Leave_Message_Controller(unittest.TestCase):
 	"""主办方账户集合"""

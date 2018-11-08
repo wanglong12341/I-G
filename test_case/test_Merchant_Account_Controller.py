@@ -154,7 +154,7 @@ class Merchant_Account_Controller(unittest.TestCase):
 		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
-		self.assertEqual(reps['data']['phone'],"12345678911","测试通过")
+		self.assertEqual(reps['data']['phone'],"18366582857","测试通过")
 
 	def test_selectData2(self):
 		"""主办方资料查询：传入非数字userId"""
