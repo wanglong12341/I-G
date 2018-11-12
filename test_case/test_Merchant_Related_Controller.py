@@ -132,3 +132,33 @@ class Merchant_Related_Controller(unittest.TestCase):
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
 		self.assertEqual(reps['data'][0]['memberId'],69090,"测试通过")
+
+	def test_getMemberList2(self):
+		"""查询会员列表：page传入非数字字符"""
+		param = {
+			"page":"@*#*",
+			"size":1,
+			"merchantId":10115228,
+		}
+		rep = self.cm.Response(faceaddr="getMemberList", param=param)
+		print("返回信息:%s" % rep.text)
+		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
+		assert rep.status_code == 400, "接口返回状态正确"
+
+	def test_sendVerifyCode1(self):
+		"""发送验证码：正常传参"""
+		param = {
+			"merchantId":10115228,
+			"superMerchantId":10115228,
+			"mobilePhone":18366582857,
+		}
+		rep = self.cm.Response(faceaddr="sendVerifyCode", param=param)
+		print("返回信息:%s" % rep.text)
+		print("返回信息头:%s" % rep.headers)
+		self.logger.info("返回信息:%s" % rep.text)
+		self.logger.info("返回信息头:%s" % rep.headers)
+		assert rep.status_code == 200, "接口返回状态正确"
+if __name__ == '__main__':
+	unittest.main()
