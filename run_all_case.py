@@ -33,6 +33,7 @@ def sendreport(file_new):
 	msg['Subject'] = Header('活动汇报告', 'utf8')
 	msg['From'] = 'bxj3416162@163.com'
 	msg['To'] = 'buxiangjie@liantuo.com'
+	msg['CC'] = 'zhengpengchuan@liantuo.com'
 
 	msg_file = MIMEText(mail_body,'base64','utf8')
 	msg_file['Content-Type'] = 'application/octet-stream'
@@ -42,7 +43,7 @@ def sendreport(file_new):
 	smtp = smtplib.SMTP('smtp.163.com')
 	smtp.set_debuglevel(1)
 	smtp.login('bxj3416162@163.com', '3416162zxc')  # 登录邮箱
-	smtp.sendmail(msg['From'], msg['To'].split(';'), msg.as_string())
+	smtp.sendmail(msg['From'], (msg['To'].split(';'),msg['CC'].split(';')), msg.as_string())
 	smtp.quit()
 	print('Report has send out!')
 
