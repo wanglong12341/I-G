@@ -5,7 +5,7 @@ from log.logger import Logger
 import unittest,json,time,os
 
 class Enroll_Related_Controller(unittest.TestCase):
-	"""发布活动接口集合"""
+	"""活动报名流程相关接口集合(创建订单/订单支付)"""
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="Enroll_Related_Controller").getlog()

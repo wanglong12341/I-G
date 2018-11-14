@@ -5,7 +5,7 @@ from log.logger import Logger
 import unittest,json,time,os
 
 class Activity_Manage_Controller(unittest.TestCase):
-	"""发布活动接口集合"""
+	"""活动管理接口集合"""
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="Activity_Manage_Controller").getlog()

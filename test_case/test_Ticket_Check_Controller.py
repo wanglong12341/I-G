@@ -5,7 +5,7 @@ from log.logger import Logger
 import unittest,json,time,os
 
 class Ticket_Check_Controller(unittest.TestCase):
-	"""发布活动接口集合"""
+	"""票券审核接口集合(审核列表、审核详情、审核通过/拒绝)"""
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="Ticket_Check_Controller").getlog()
