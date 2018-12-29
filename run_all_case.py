@@ -43,7 +43,8 @@ def sendreport(file_new):
 	smtp = smtplib.SMTP('smtp.163.com')
 	smtp.set_debuglevel(1)
 	smtp.login('bxj3416162@163.com', '3416162zxc')  # 登录邮箱
-	smtp.sendmail(msg['From'], (msg['To'].split(';'),msg['CC'].split(';')), msg.as_string())
+	# smtp.sendmail(msg['From'], (msg['To'].split(';'),msg['CC'].split(';')), msg.as_string())
+	smtp.sendmail(msg['From'], (msg['To'].split(';')), msg.as_string())
 	smtp.quit()
 	print('Report has send out!')
 

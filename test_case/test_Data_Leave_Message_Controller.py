@@ -28,7 +28,7 @@ class Data_Leave_Message_Controller(unittest.TestCase):
 		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200,"接口返回状态正确"
-		self.assertEqual(reps['msg'],"留言回复列表为空","测试通过")
+		self.assertEqual(reps['msg'],"留言回复列表为空")
 
 	def test_messageList2(self):
 		"""留言列表：传不存在userId"""
@@ -45,7 +45,7 @@ class Data_Leave_Message_Controller(unittest.TestCase):
 		self.logger.info("返回信息头:%s" % rep.headers)
 		reps = json.loads(rep.text)
 		assert rep.status_code == 200, "接口返回状态正确"
-		self.assertEqual(reps['msg'], "小程序信息不存在", "测试通过")
+		self.assertEqual(reps['msg'], "主办方信息不存在")
 
 	def test_messageList3(self):
 		"""留言列表：不传某一项必传参数"""

@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 from common.common_func import Common
 from log.logger import Logger
-import unittest,json,time,os
+import unittest,json
 
 class Enroll_Related_Controller(unittest.TestCase):
 	"""活动报名流程相关接口集合(创建订单/订单支付)"""
@@ -16,19 +16,19 @@ class Enroll_Related_Controller(unittest.TestCase):
 	def test_createAppletOrder1(self):
 		"""创建订单：正常传参"""
 		param = {
-			"activityId": 1126,
+			"activityId": 1358,
 			"orderPrice": 0,
 			"payPrice": 0,
 			"ticketCount":1,
-			"memberId":66019,
-			"merchantId":10115556,
-			"contactsName":"卜祥杰",
-			"contactsPhone":"18366582857",
-			"channelId":1073,
-			"inventoryId":4740,
-			"ticketId":1517,
-			"enrollInfos":"[{'<enrollInfo><field><name>职位</name><value>c</value><type>0</type><sequence>4</sequence><fieldtype>0</fieldtype></field></enrollInfo>'}]",
-		}
+			"memberId":69938,
+			"merchantId":10115875,
+			"contactsName":"骚伟",
+			"contactsPhone":"13121329765",
+			"channelId":1305,
+			"inventoryId":5406,
+			"ticketId":1917,
+			"enrollInfos":"[{\"enrollXml\":'<enrollInfo><field><name>姓名</name><value>poison</value><type>1</type><sequence>0</sequence><fieldtype>0</fieldtype></field><field><name>手机号</name><value>18366582857</value><type>2</type><sequence>1</sequence><fieldtype>0</fieldtype></field></enrollInfo>'}]",
+			}
 		rep = self.cm.Response(faceaddr="createAppletOrder", param=param)
 		print("返回信息:%s" % rep.text)
 		print("返回信息头:%s" % rep.headers)
