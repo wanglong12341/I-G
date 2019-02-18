@@ -16,7 +16,7 @@ def all_case():
 	case_dir = "./test_case"
 	logger.info("用例执行文件夹%s"%case_dir)
 	testcase = unittest.TestSuite()
-	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test*.py", top_level_dir=None)
+	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_Ticket_Check_Controller.py", top_level_dir=None)
 
 	for test_suit in discover:
 		for test_case in test_suit:
@@ -63,5 +63,5 @@ if __name__ == "__main__":
 	runner = HTMLTestRunner(stream=fp, title='活动汇接口报告', description='执行情况')
 	runner.run(all_case())
 	fp.close()
-	new_report = newreport(os.getcwd() + "/test_report")
-	sendreport(new_report)#调用发送报告函数
+	# new_report = newreport(os.getcwd() + "/test_report")
+	# sendreport(new_report)#调用发送报告函数

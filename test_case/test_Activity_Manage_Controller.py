@@ -41,34 +41,6 @@ class Activity_Manage_Controller(unittest.TestCase):
 		self.logger.info("返回信息:%s" % rep.text)
 		self.logger.info("返回信息头:%s" % rep.headers)
 		assert rep.status_code == 200, "接口返回状态不正确"
-	#接口已删除
-	# def test_activityOrderList1(self):
-	# 	"""活动订单列表：正常传参"""
-	# 	param = {
-	# 		"page": 1,
-	# 		"size": 1,
-	# 		"activityId": 935,
-	# 	}
-	# 	rep = self.cm.Response(faceaddr="activityOrderList", param=param)
-	# 	print("返回信息:%s" % rep.text)
-	# 	print("返回信息头:%s" % rep.headers)
-	# 	self.logger.info("返回信息:%s" % rep.text)
-	# 	self.logger.info("返回信息头:%s" % rep.headers)
-	# 	assert rep.status_code == 200, "接口返回状态不正确"
-
-	#接口已删除
-	# def test_activityShare1(self):
-	# 	"""活动分享：正常传参"""
-	# 	param = {
-	# 		"merchantId": 10115246,
-	# 		"activityId": 935,
-	# 	}
-	# 	rep = self.cm.Response(faceaddr="activityShare", param=param)
-	# 	print("返回信息:%s" % rep.text)
-	# 	print("返回信息头:%s" % rep.headers)
-	# 	self.logger.info("返回信息:%s" % rep.text)
-	# 	self.logger.info("返回信息头:%s" % rep.headers)
-	# 	assert rep.status_code == 200, "接口返回状态不正确"
 
 	def test_findActivityList1(self):
 		"""活动列表：正常传参"""
