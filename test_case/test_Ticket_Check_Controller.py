@@ -14,14 +14,6 @@ class Ticket_Check_Controller(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="Ticket_Check_Controller").getlog()
-		# self.url = excel_data['url']
-		# self.casename = excel_data['casename']
-		# self.ids =excel_data['ids']
-		# self.userId = excel_data['userId']
-		# self.status = excel_data['status']
-		# self.code = excel_data['code']
-		# self.request = excel_data['request']
-		# self.reason = excel_data['reason']
 
 	def tearDown(self):
 		pass
