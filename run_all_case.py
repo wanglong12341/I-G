@@ -16,7 +16,7 @@ def all_case():
 	case_dir = "./test_case"
 	logger.info("用例执行文件夹%s"%case_dir)
 	testcase = unittest.TestSuite()
-	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_Ticket_Check_Controller.py", top_level_dir=None)
+	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_*.py", top_level_dir=None)
 
 	for test_suit in discover:
 		for test_case in test_suit:
@@ -30,9 +30,9 @@ def sendreport(file_new):
 	f.close()
 	logger.info("mail_body:%s"%mail_body)
 	msg = MIMEMultipart()
-	msg['Subject'] = Header('活动汇报告', 'utf8')
+	msg['Subject'] = Header('中投保报告', 'utf8')
 	msg['From'] = 'bxj3416162@163.com'
-	msg['To'] = 'buxiangjie@liantuo.com'
+	msg['To'] = 'buxiangjie@cloudloan.com'
 	msg['CC'] = 'zhengpengchuan@liantuo.com'
 
 	msg_file = MIMEText(mail_body,'base64','utf8')
@@ -60,7 +60,7 @@ if __name__ == "__main__":
 	newtime = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
 	filename =r"./test_report/" + newtime + '.html'
 	fp = open(filename, 'wb+')
-	runner = HTMLTestRunner(stream=fp, title='活动汇接口报告', description='执行情况')
+	runner = HTMLTestRunner(stream=fp, title='中投保接口报告', description='执行情况')
 	runner.run(all_case())
 	fp.close()
 	# new_report = newreport(os.getcwd() + "/test_report")
