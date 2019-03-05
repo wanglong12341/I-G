@@ -3,7 +3,7 @@
 """
 @auth:buxiangjie
 @date:2019.3.5 13:26
-@describe:用户的额度查询接口
+@describe:额度授信接口
 """
 
 import unittest,os,json
@@ -15,10 +15,10 @@ from common.openExcel import excel_table_byname
 @ddt.ddt
 class query_User_Amount(unittest.TestCase):
 	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
-	excel_data = excel_table_byname(excel, 'query_user_amount')
+	excel_data = excel_table_byname(excel, 'credit_apply_data')
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="query_user_amount").getlog()
+		self.logger = Logger(logger="credit_apply_data").getlog()
 
 	def tearDown(self):
 		pass
