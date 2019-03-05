@@ -14,7 +14,7 @@ from common.openExcel import excel_table_byname
 
 @ddt.ddt
 class query_User_Amount(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/chezhibao_test.xlsx"
 	excel_data = excel_table_byname(excel, 'query_user_amount')
 	def setUp(self):
 		self.cm = Common()

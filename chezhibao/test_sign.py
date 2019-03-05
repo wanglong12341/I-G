@@ -14,12 +14,12 @@ from common.openExcel import excel_table_byname
 
 @ddt.ddt
 class contract_sign(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/chezhibao_test.xlsx"
 	excel_data = excel_table_byname(excel, 'contract_sign')
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="contract_sign").getlog()
-		with open(self.cm.get_json_data('contract_sign.json'),'r') as f:
+		with open(self.cm.get_json_data('chezhibao_contract_sign.json'),'r') as f:
 			self.data = json.loads(f.read())
 
 	def tearDown(self):

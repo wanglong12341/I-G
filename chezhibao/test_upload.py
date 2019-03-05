@@ -14,12 +14,12 @@ from common.openExcel import excel_table_byname
 
 @ddt.ddt
 class upload(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/chezhibao_test.xlsx"
 	excel_data = excel_table_byname(excel, 'upload')
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="upload").getlog()
-		with open(self.cm.get_json_data('upload.json'),'r') as f:
+		with open(self.cm.get_json_data('chezhibao_upload.json'),'r') as f:
 			self.data = json.loads(f.read())
 
 	def tearDown(self):
