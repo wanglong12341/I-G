@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-"""
+'''
 @auth:buxiangjie
-@date:2019.3.5 13:26
-@describe:额度授信接口
-"""
+@date:2019.03.05 15:10
+@describe:查询当前还款计划接口
+'''
 
 import unittest,os,json
 import ddt
@@ -13,18 +13,18 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname
 
 @ddt.ddt
-class credit_apply(unittest.TestCase):
+class repayment_plan(unittest.TestCase):
 	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
-	excel_data = excel_table_byname(excel, 'credit_apply_data')
+	excel_data = excel_table_byname(excel, 'repayment_plan')
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="credit_apply_data").getlog()
+		self.logger = Logger(logger="repayment_plan").getlog()
 
 	def tearDown(self):
 		pass
 
 	@ddt.data(*excel_data)
-	def test_credit_apply(self,data):
+	def test_repayment_plan(self,data):
 		print("接口名称:%s"%data['casename'])
 		param =json.loads(data['param'])
 		if len(data['headers']) == 0:

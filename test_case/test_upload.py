@@ -13,7 +13,7 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname
 
 @ddt.ddt
-class query_User_Amount(unittest.TestCase):
+class upload(unittest.TestCase):
 	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/test.xlsx"
 	excel_data = excel_table_byname(excel, 'upload')
 	def setUp(self):
@@ -26,7 +26,7 @@ class query_User_Amount(unittest.TestCase):
 		pass
 
 	@ddt.data(*excel_data)
-	def test_query_user_amount(self,data):
+	def test_upload(self,data):
 		print("接口名称:%s"%data['casename'])
 		param =self.data
 		if len(data['headers']) == 0:
