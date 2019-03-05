@@ -13,7 +13,7 @@ sys.path.append('')
 logger = Logger(logger="run_all_case").getlog()
 
 def all_case():
-	case_dir = "./test_case"
+	case_dir = "./chezhibao"
 	logger.info("用例执行文件夹%s"%case_dir)
 	testcase = unittest.TestSuite()
 	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_*.py", top_level_dir=None)
@@ -27,7 +27,6 @@ def all_case():
 def sendreport(file_new):
 	with open(file_new, 'rb') as f:
 		mail_body = f.read()
-	f.close()
 	logger.info("mail_body:%s"%mail_body)
 	msg = MIMEMultipart()
 	msg['Subject'] = Header('中投保报告', 'utf8')
