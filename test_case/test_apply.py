@@ -31,11 +31,8 @@ class query_User_Amount(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data['headers'])
-		print("请求信息头:%s"%headers)
-		print("请求参数:%s"%param)
 		rep = self.cm.Response(faceaddr=data['url'],headers=headers,param=param)
-		print("返回信息头:%s" % rep.headers)
-		print("返回信息:%s" % rep.text)
+		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 
 if __name__ == '__main__':
