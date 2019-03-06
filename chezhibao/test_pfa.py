@@ -19,7 +19,6 @@ class project_loan(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="project_loan").getlog()
-
 	def tearDown(self):
 		pass
 
