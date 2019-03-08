@@ -3,7 +3,7 @@
 """
 @auth:buxiangjie
 @date:2019.3.5 13:26
-@describe:进件接口
+@describe:进件结果查询接口
 """
 
 import unittest,os,json
