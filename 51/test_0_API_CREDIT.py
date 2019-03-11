@@ -11,10 +11,11 @@ import ddt
 from common.common_func import Common
 from log.logger import Logger
 from common.openExcel import excel_table_byname
+from config.configer import Config
 
 @ddt.ddt
 class contract_sign(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/data/chezhibao_test.xlsx"
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File','51_test')
 	excel_data = excel_table_byname(excel, 'contract_sign')
 	def setUp(self):
 		self.cm = Common()
