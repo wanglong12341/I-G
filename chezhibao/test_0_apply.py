@@ -15,7 +15,7 @@ from config.configer import Config
 
 @ddt.ddt
 class credit_apply(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('file','czb_case_file')
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File','czb_case_file')
 	excel_data = excel_table_byname(excel, 'credit_apply_data')
 	def setUp(self):
 		self.cm = Common()
