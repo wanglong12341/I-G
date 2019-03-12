@@ -20,8 +20,7 @@ class upload(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="upload").getlog()
-		with open(self.cm.get_json_data('chezhibao_upload.json'),'r') as f:
-			self.data = json.loads(f.read())
+		self.data = self.cm.get_json_data('chezhibao_upload.json')
 
 	def tearDown(self):
 		pass

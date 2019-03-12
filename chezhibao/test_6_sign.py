@@ -20,8 +20,7 @@ class contract_sign(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.logger = Logger(logger="contract_sign").getlog()
-		with open(self.cm.get_json_data('chezhibao_contract_sign.json'),'r') as f:
-			self.data = json.loads(f.read())
+		self.data = self.cm.get_json_data('chezhibao_contract_sign.json')
 
 	def tearDown(self):
 		pass
@@ -37,6 +36,7 @@ class contract_sign(unittest.TestCase):
 		rep = self.cm.Response(faceaddr=data['url'],headers=headers,param=param)
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
+
 
 if __name__ == '__main__':
 	unittest.main()
