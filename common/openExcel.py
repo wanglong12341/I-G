@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-import xlrd
+import xlrd,os
+from common.common_func import Common
 
 def open_excel(file):
 	try:
@@ -25,3 +26,8 @@ def excel_table_byname(file,by_name, colnameindex=0):
 				app[colnames[i]] = row[i]  # 当i有长度时，app数组里面第i行等于row的第i行的值
 			list.append(app)  # 把app的值添加到列表中
 	return list
+
+def get_borrowser():
+	Common().create_borrowers()
+	return excel_table_byname(os.path.dirname(
+				os.path.dirname(os.path.abspath(__file__))) + '/data/borrowers.xls','borrowers')[0]
