@@ -36,12 +36,16 @@ class credit_apply(unittest.TestCase):
 		self.phone = self.cm.get_random('phone')
 		self.cardNum = person['idcard']
 		self.custName = person['name']
+		self.firstCreditDate = self.cm.get_time()
 		param['personalInfo'].update({"cardNum": self.cardNum})
 		param['personalInfo'].update({"custName": self.custName})
 		param['personalInfo'].update({"phone": self.phone})
+		param['applyInfo'].update({"applyTime": self.cm.get_time()})
+		param['riskSuggestion'].update({"firstCreditDate": self.firstCreditDate})
 		param.update({"sourceUserId": self.sourceUserId})
 		param.update({"serviceSn":self.cm.get_random('serviceSn')})
 		param.update({"transactionId": self.transactionId})
+
 
 		if len(data[0]['headers']) == 0:
 			headers = None
@@ -130,6 +134,8 @@ class credit_apply(unittest.TestCase):
 		param['personalInfo'].update({"cardNum":self.cardNum})
 		param['personalInfo'].update({"custName":self.custName})
 		param['personalInfo'].update({"phone":self.phone})
+		param['applyInfo'].update({"applyTime":self.cm.get_time()})
+		param['riskSuggestion'].update({"firstCreditDate":self.firstCreditDate})
 		if len(data[0]['headers']) == 0:
 			headers = None
 		else:
