@@ -3,7 +3,7 @@
 """
 @auth:buxiangjie
 @date:2019.3.5 13:26
-@describe:额度授信接口
+@describe:51业务流程接口
 """
 
 import unittest,os,json
@@ -35,7 +35,6 @@ class api_credit(unittest.TestCase):
 		rep = self.cm.Response(faceaddr=data['url'],headers=headers,product='51',param=param)
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
-		self.assertEqual(json.loads(rep.text)['msgCode'], data['msgCode'], '返回code不一致')
 
 if __name__ == '__main__':
 	unittest.main()
