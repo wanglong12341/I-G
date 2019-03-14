@@ -3,7 +3,7 @@
 """
 @auth:buxiangjie
 @date:2019.3.5 13:26
-@describe:额度授信接口
+@describe:车置宝业务流程接口
 """
 
 import unittest, os, json
