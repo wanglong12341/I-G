@@ -2,8 +2,8 @@
 # -*- coding: UTF-8 -*-
 """
 @auth:buxiangjie
-@date:2019.3.5 13:26
-@describe:额度授信接口
+@date:2019.3.14 13:26
+@describe:用户授信结果查询
 """
 
 import unittest,os,json
@@ -14,27 +14,25 @@ from common.openExcel import excel_table_byname
 from config.configer import Config
 
 @ddt.ddt
-class contract_sign(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File','51_test')
-	excel_data = excel_table_byname(excel, 'contract_sign')
+class api_query_credit(unittest.TestCase):
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File','51_case_file')
+	excel_data = excel_table_byname(excel, 'api_query_credit')
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="contract_sign").getlog()
-		with open(self.cm.get_json_data('chezhibao_contract_sign.json'),'r') as f:
-			self.data = json.loads(f.read())
+		self.logger = Logger(logger="api_query_credit").getlog()
 
 	def tearDown(self):
 		pass
 
 	@ddt.data(*excel_data)
-	def test_contract_sign(self,data):
+	def test_api_query_credit(self,data):
 		print("接口名称:%s"%data['casename'])
-		param =self.data
+		param =data['param']
 		if len(data['headers']) == 0:
 			headers = None
 		else:
 			headers = json.loads(data['headers'])
-		rep = self.cm.Response(faceaddr=data['url'],headers=headers,param=param)
+		rep = self.cm.Response(faceaddr=data['url'],headers=headers,product='51',param=param)
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 

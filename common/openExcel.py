@@ -18,7 +18,7 @@ def excel_table_byname(file,by_name, colnameindex=0):
 	nrows = table.nrows  # 列数
 	colnames = table.row_values(colnameindex)  # 第colnameindex行数据
 	list = []  # 准备一个空列表放数据
-	for rownum in range(1, nrows):  # for循环  由于0是phone，所以循环从1开始
+	for rownum in range(1, nrows):  # for循环  由于0是标题，所以循环从1开始
 		row = table.row_values(rownum)  # row等于rownum行的值
 		if row:
 			app = {}  # 定义一个空数组
@@ -28,6 +28,7 @@ def excel_table_byname(file,by_name, colnameindex=0):
 	return list
 
 def get_borrowser():
+	'''以字典的形式返回爬取的姓名和身份证号'''
 	Common().create_borrowers()
 	return excel_table_byname(os.path.dirname(
 				os.path.dirname(os.path.abspath(__file__))) + '/data/borrowers.xls','borrowers')[0]
