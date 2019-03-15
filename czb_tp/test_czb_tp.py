@@ -168,7 +168,7 @@ class credit_apply(unittest.TestCase):
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
-    def test_6_sign_contract(self):
+    def test_6_contract_sign(self):
         '''上传借款合同'''
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'contract_sign')
