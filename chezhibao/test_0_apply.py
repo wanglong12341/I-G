@@ -37,6 +37,7 @@ class credit_apply(unittest.TestCase):
 		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=param)
 		print("返回信息:%s" % rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'], data['resultCode'])
 
 
 if __name__ == '__main__':
