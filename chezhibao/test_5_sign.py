@@ -35,7 +35,7 @@ class contract_sign(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data['headers'])
-		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=param)
+		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param))
 		print("响应结果:%s" % rep)
 		print("返回信息:%s" % rep.text)
 		self.logger.info("返回信息:%s" % rep.text)

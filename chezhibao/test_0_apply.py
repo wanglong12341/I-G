@@ -29,9 +29,10 @@ class credit_apply(unittest.TestCase):
 	@ddt.data(*excel_data)
 	def test_credit_apply(self, data):
 		print("接口名称:%s" % data['casename'])
-		if data['yn'] == 'Y' or 'y':
+		if data['yn'] == 'Y' or 'y' :
 			person = get_borrowser()
 			param = json.loads(data['param'])
+			print(type(param))
 			param['personalInfo'].update({"cardNum": person['idcard']})
 			param['personalInfo'].update({"custName": person['name']})
 			param['personalInfo'].update({"phone": self.cm.get_random('phone')})
@@ -44,11 +45,12 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=param)
+				print(headers)
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param))
 			print("响应结果:%s"%rep)
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
-			self.assertEqual(json.loads(rep.text)['resultCode'], data['resultCode'])
+			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 		else:
 			param = json.loads(data['param'])
 			param['applyInfo'].update({"applyTime":self.cm.get_time('-')})
@@ -59,7 +61,7 @@ class credit_apply(unittest.TestCase):
 			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=param)
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
-			self.assertEqual(json.loads(rep.text)['resultCode'], data['resultCode'])
+			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 
 if __name__ == '__main__':
 	unittest.main()
