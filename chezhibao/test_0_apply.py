@@ -32,7 +32,6 @@ class credit_apply(unittest.TestCase):
 		if data['yn'] == 'Y' or 'y' :
 			person = get_borrowser()
 			param = json.loads(data['param'])
-			print(type(param))
 			param['personalInfo'].update({"cardNum": person['idcard']})
 			param['personalInfo'].update({"custName": person['name']})
 			param['personalInfo'].update({"phone": self.cm.get_random('phone')})
@@ -45,8 +44,7 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-				print(headers)
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param))
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
 			print("响应结果:%s"%rep)
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
@@ -58,7 +56,7 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=param)
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])

@@ -42,7 +42,7 @@ class api_credit(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'],headers=headers,product='51',param=json.dumps(param))
+			rep = self.cm.Response(faceaddr=data['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
 			print("返回信息:%s"%rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(json.loads(rep.text)['msgCode'], data['msgCode'], '返回code不一致')

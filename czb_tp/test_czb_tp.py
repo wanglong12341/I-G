@@ -52,7 +52,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
         creditId = json.loads(rep.text)['content']['creditId']
@@ -82,7 +82,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
@@ -98,7 +98,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
@@ -119,7 +119,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
@@ -142,7 +142,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
         projectId = json.loads(rep.text['projectId'])
@@ -164,7 +164,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
@@ -184,7 +184,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
@@ -203,7 +203,7 @@ class credit_apply(unittest.TestCase):
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param))
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
