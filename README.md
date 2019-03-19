@@ -25,3 +25,4 @@ test_report：测试报告输出文件
 run_all_case：shell命令执行的文件
 执行命令：
 python run_all_case.py casefile(需要执行用例的文件夹51/51_tp/chezhibao/czb_tp) system(运行系统mac/windows/linux)
+--------------------------------------项目执行文件--------------------------------------
