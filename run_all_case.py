@@ -14,6 +14,7 @@ sys.path.append('')
 logger = Logger(logger="run_all_case").getlog()
 
 def all_case(dir):
+	'''批量添加用例到测试套件'''
 	if dir == 'chezhibao':
 		case_dir = "./chezhibao"
 		logger.info("用例执行文件夹%s"%case_dir)
@@ -36,6 +37,7 @@ def all_case(dir):
 
 
 def sendreport(file_new):
+	'''使用smtp发送测试报告'''
 	with open(file_new, 'rb') as f:
 		mail_body = f.read()
 	logger.info("mail_body:%s"%mail_body)
@@ -60,6 +62,7 @@ def sendreport(file_new):
 
 
 def newreport(test_report):
+	'''遍历出最新的测试报告'''
 	lists = os.listdir(test_report)  # 通过os.listdir函数遍历出该目录下所有文件
 	lists2 = sorted(lists)  # 按正序排列文件
 	file_new = os.path.join(test_report, lists2[-1])  # 找到正序排序的下面一个文件，即最新的文件
@@ -68,10 +71,13 @@ def newreport(test_report):
 def set_driver(system):
 	if system == 'mac':
 		Config().Set_Item('Driver','system',system)
+		logger.info("driver:%s设置成功"%system)
 	elif system == 'linux':
 		Config().Set_Item('Driver', 'system', system)
+		logger.info("driver:%s设置成功" % system)
 	elif system == 'windows':
 		Config().Set_Item('Driver', 'system', system)
+		logger.info("driver:%s设置成功" % system)
 	else:
 		raise Exception("不支持该系统设置driver")
 
