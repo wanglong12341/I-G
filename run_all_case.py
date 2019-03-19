@@ -8,13 +8,24 @@ from email.header import Header
 from HtmlRpeort.HtmlReport2 import HTMLTestRunner
 from email.mime.multipart import MIMEMultipart
 from log.logger import Logger
+from config.configer import Config
 
 sys.path.append('')
 logger = Logger(logger="run_all_case").getlog()
 
-def all_case():
-	case_dir = "./chezhibao"
-	logger.info("用例执行文件夹%s"%case_dir)
+def all_case(dir):
+	if dir == 'chezhibao':
+		case_dir = "./chezhibao"
+		logger.info("用例执行文件夹%s"%case_dir)
+	elif dir == 'czb_tp':
+		case_dir = "./czb_tp"
+		logger.info("用例执行文件夹%s" % case_dir)
+	elif str(dir) == '51':
+		case_dir = "./51"
+		logger.info("用例执行文件夹%s" % case_dir)
+	elif dir == '51_tp':
+		case_dir = "./51_tp"
+		logger.info("用例执行文件夹%s" % case_dir)
 	testcase = unittest.TestSuite()
 	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_*.py", top_level_dir=None)
 
@@ -54,13 +65,23 @@ def newreport(test_report):
 	file_new = os.path.join(test_report, lists2[-1])  # 找到正序排序的下面一个文件，即最新的文件
 	return file_new
 
+def set_driver(system):
+	if system == 'mac':
+		Config().Set_Item('Driver','system',system)
+	elif system == 'linux':
+		Config().Set_Item('Driver', 'system', system)
+	elif system == 'windows':
+		Config().Set_Item('Driver', 'system', system)
+	else:
+		raise Exception("不支持该系统设置driver")
 
 if __name__ == "__main__":
 	newtime = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
 	filename =r"./test_report/" + newtime + '.html'
+	set_driver(sys.argv[2])
 	fp = open(filename, 'wb+')
 	runner = HTMLTestRunner(stream=fp, title='中投保接口报告', description='执行情况')
-	runner.run(all_case())
+	runner.run(all_case(sys.argv[1]))
 	fp.close()
 	# new_report = newreport(os.getcwd() + "/test_report")
 	# sendreport(new_report)#调用发送报告函数
