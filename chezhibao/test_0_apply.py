@@ -44,7 +44,7 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 			print("响应结果:%s"%rep)
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
@@ -56,7 +56,7 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False))
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 			print("返回信息:%s" % rep.text)
 			self.logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
