@@ -45,7 +45,7 @@ def sendreport(file_new):
 	msg['Subject'] = Header('中投保报告', 'utf8')
 	msg['From'] = 'bxj3416162@163.com'
 	msg['To'] = 'buxiangjie@cloudloan.com'
-	msg['CC'] = 'zhengpengchuan@liantuo.com'
+	msg['CC'] = 'wangxl@cloudloan.com'
 
 	msg_file = MIMEText(mail_body,'base64','utf8')
 	msg_file['Content-Type'] = 'application/octet-stream'
@@ -55,8 +55,8 @@ def sendreport(file_new):
 	smtp = smtplib.SMTP('smtp.163.com')
 	smtp.set_debuglevel(1)
 	smtp.login('bxj3416162@163.com', '3416162zxc')  # 登录邮箱
-	# smtp.sendmail(msg['From'], (msg['To'].split(';'),msg['CC'].split(';')), msg.as_string())
-	smtp.sendmail(msg['From'], (msg['To'].split(';')), msg.as_string())
+	smtp.sendmail(msg['From'], (msg['To'].split(';'),msg['CC'].split(';')), msg.as_string())
+	# smtp.sendmail(msg['From'], (msg['To'].split(';')), msg.as_string())
 	smtp.quit()
 	print('Report has send out!')
 
@@ -89,5 +89,5 @@ if __name__ == "__main__":
 	runner = HTMLTestRunner(stream=fp, title='中投保接口报告', description='执行情况')
 	runner.run(all_case(sys.argv[1]))
 	fp.close()
-	# new_report = newreport(os.getcwd() + "/test_report")
-	# sendreport(new_report)#调用发送报告函数
+	new_report = newreport(os.getcwd() + "/test_report")
+	sendreport(new_report)#调用发送报告函数
