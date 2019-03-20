@@ -38,7 +38,7 @@ class project_loan(unittest.TestCase):
 		print("响应结果:%s" % rep)
 		print("返回信息:%s" % rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
-		self.assertEqual(json.loads(rep.text)['resultCode'], data['resultCode'])
+		self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 
 
 if __name__ == '__main__':
