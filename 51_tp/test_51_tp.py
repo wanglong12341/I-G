@@ -47,7 +47,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 		creditNo = json.loads(rep.text)['creditNo']
@@ -71,7 +71,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 
@@ -93,7 +93,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 
@@ -116,7 +116,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 		ItemNo = json.loads(rep.text)['ItemNo']
@@ -138,7 +138,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 
@@ -167,7 +167,7 @@ class tp(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data[0]['headers'])
-		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False))
+		rep = self.cm.Response(faceaddr=data[0]['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s"%rep.text)
 		self.logger.info("返回信息:%s" % rep.text)
 
