@@ -199,6 +199,7 @@ class credit_apply(unittest.TestCase):
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
         param.update({"accountName": self.r.get('custName').decode()})
         param.update({"id": self.r.get('cardNum')})
+        self.r.set("pfa_serviceSn",param['serviceSn'])
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -207,6 +208,20 @@ class credit_apply(unittest.TestCase):
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
+    def test_8_pfa_query(self):
+        '''放款结果查询'''
+        excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
+        data = excel_table_byname(excel, 'project_loan')
+        param = json.loads(data[0]['param'])
+        param.update({"serviceSn": self.r.get('pfa_serviceSn')})
+        if len(data[0]['headers']) == 0:
+            headers = None
+        else:
+            headers = json.loads(data[0]['headers'])
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+                               param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+        print("返回信息:%s" % rep.text)
+        self.logger.info("返回信息:%s" % rep.text)
 
 if __name__ == '__main__':
     unittest.main()
