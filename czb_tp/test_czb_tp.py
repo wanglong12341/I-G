@@ -6,7 +6,7 @@
 @describe:车置宝业务流程接口
 """
 
-import unittest, os, json
+import unittest, os, json,time
 import ddt
 from common.common_func import Common
 from log.logger import Logger
@@ -39,45 +39,41 @@ class credit_apply(unittest.TestCase):
              }
         )
         param = json.loads(data[0]['param'])
-        param['personalInfo'].update({"cardNum": self.r.get('cardNum')})
-        param['personalInfo'].update({"custName": self.r.get('custName').decode()})
-        param['personalInfo'].update({"phone": self.r.get('phone')})
+        param['personalInfo'].update({"cardNum": str(self.r.get('cardNum'),encoding='utf8')})
+        param['personalInfo'].update({"custName": str(self.r.get('custName').decode())})
+        param['personalInfo'].update({"phone": str(self.r.get('phone'),encoding='utf8')})
         param['applyInfo'].update({"applyTime": self.cm.get_time()})
-        param['riskSuggestion'].update({"firstCreditDate": self.r.get('firstCreditDate')})
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
+        param['riskSuggestion'].update({"firstCreditDate": str(self.r.get('firstCreditDate'),encoding='utf8')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
-        param.update({"transactionId": self.r.get('transactionId')})
-
+        param.update({"transactionId": str(self.r.get('transactionId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
+        print(type(param))
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
         creditId = json.loads(rep.text)['content']['creditId']
-        userId = json.loads(rep.text)['content']['userid']
+        userId = json.loads(rep.text)['content']['userId']
         self.r.mset({"creditId":creditId,"userId":userId})
         print("creditId:%s" % creditId)
-        self.logger.info("creditId:%s" % creditId)
+        print("userId:%s"%userId)
         print("sourceUserId:%s" % self.r.get('sourceUserId'))
-        self.logger.info("sourceUserId:%s" % self.r.get('sourceUserId'))
         print("transactionId:%s" % self.r.get('transactionId'))
-        self.logger.info("transactionId:%s" % self.r.get('transactionId'))
         print("phone:%s" % self.r.get('phone'))
-        self.logger.info("phone:%s" % self.r.get('phone'))
         print("cardNum:%s" % self.r.get('cardNum'))
-        self.logger.info("cardNum:%s" % self.r.get('cardNum'))
-        print("custName:%s" % self.r.get('custName'))
-        self.logger.info("custName:%s" % self.r.get('custName'))
+        print("custName:%s" % str(self.r.get('custName'),encoding='utf8'))
 
     def test_1_query_result(self):
         '''授信结果查询'''
+        time.sleep(10)
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'credit_query_result')
         print("接口名称:%s" % data[0]['casename'])
         param = json.loads(data[0]['param'])
-        param.update({"creditId": self.r.get('creditId')})
+        param.update({"creditId": str(self.r.get('creditId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -92,8 +88,8 @@ class credit_apply(unittest.TestCase):
         data = excel_table_byname(excel, 'query_user_amount')
         print("接口名称:%s" % data[0]['casename'])
         param = json.loads(data[0]['param'])
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
-        param.update({"userId": self.r.get('userId')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
+        param.update({"userId": str(self.r.get('userId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -107,14 +103,13 @@ class credit_apply(unittest.TestCase):
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'contract_sign')
         print("接口名称:%s" % data[0]['casename'])
-        print(self.r.get('sourceUserId'))
         param = self.cm.get_json_data('chezhibao_contract_sign.json')
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
         param.update({"contractType": 1})
         param.update({"sourceContractId": self.cm.get_random('userid')})
-        param.update({"transactionId": self.r.get('transactionId')})
-        param.update({"associationId": self.r.get('creditId')})
+        param.update({"transactionId": str(self.r.get('transactionId'),encoding='utf8')})
+        param.update({"associationId": str(self.r.get('creditId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -130,36 +125,34 @@ class credit_apply(unittest.TestCase):
         print("接口名称:%s" % data[0]['casename'])
         param = json.loads(data[0]['param'])
         self.r.set('sourceProjectId',self.cm.get_random('sourceProjectId'))
-        param.update({"sourceProjectId": self.r.get('sourceProjectId')})
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
-        param.update({"transactionId": self.r.get('transactionId')})
-        param['personalInfo'].update({"cardNum": self.r.get('cardNum')})
+        param.update({"sourceProjectId": str(self.r.get('sourceProjectId'),encoding='utf8')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
+        param.update({"transactionId": str(self.r.get('transactionId'),encoding='utf8')})
+        param['personalInfo'].update({"cardNum": str(self.r.get('cardNum'),encoding='utf8')})
         param['personalInfo'].update({"custName": self.r.get('custName').decode()})
-        param['personalInfo'].update({"phone": self.r.get('phone')})
+        param['personalInfo'].update({"phone": str(self.r.get('phone'),encoding='utf8')})
         param['applyInfo'].update({"applyTime": self.cm.get_time()})
-        param['riskSuggestion'].update({"firstCreditDate": self.r.get('firstCreditDate')})
+        param['riskSuggestion'].update({"firstCreditDate": str(self.r.get('firstCreditDate'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
-        projectId = json.loads(rep.text['projectId'])
+        projectId = json.loads(rep.text)['content']['projectId']
         self.r.set('projectId',projectId)
         print("projectId:%s" % self.r.get('projectId'))
-        self.logger.info("projectId:%s" % self.r.get('projectId'))
         print("sourceProjectId:%s" % self.r.get('sourceProjectId'))
-        self.logger.info("sourceProjectId:%s" % self.r.get('sourceProjectId'))
 
     def test_5_query_apply_result(self):
         '''进件结果查询'''
+        time.sleep(10)
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'project_query_apply_result')
         print("接口名称:%s" % data[0]['casename'])
         param = json.loads(data[0]['param'])
-        param.update({"sourceProjectId": self.r.get('sourceProjectId')})
-        param.update({"projectId": self.r.get('projectId')})
+        param.update({"sourceProjectId": str(self.r.get('sourceProjectId'),encoding='utf8')})
+        param.update({"projectId": str(self.r.get('projectId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -175,11 +168,11 @@ class credit_apply(unittest.TestCase):
         print("接口名称:%s" % data[0]['casename'])
         param = self.cm.get_json_data('chezhibao_contract_sign.json')
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
         param.update({"contractType": 2})
         param.update({"sourceContractId": self.cm.get_random('userid')})
-        param.update({"transactionId": self.r.get('transactionId')})
-        param.update({"associationId": self.r.get('projectId')})
+        param.update({"transactionId": str(self.r.get('transactionId'),encoding='utf8')})
+        param.update({"associationId": str(self.r.get('projectId'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
@@ -193,12 +186,12 @@ class credit_apply(unittest.TestCase):
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'project_loan')
         param = json.loads(data[0]['param'])
-        param.update({"sourceProjectId": self.r.get('sourceProjectId')})
-        param.update({"projectId": self.r.get('projectId')})
-        param.update({"sourceUserId": self.r.get('sourceUserId')})
+        param.update({"sourceProjectId": str(self.r.get('sourceProjectId'),encoding='utf8')})
+        param.update({"projectId": str(self.r.get('projectId'),encoding='utf8')})
+        param.update({"sourceUserId": str(self.r.get('sourceUserId'),encoding='utf8')})
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
         param.update({"accountName": self.r.get('custName').decode()})
-        param.update({"id": self.r.get('cardNum')})
+        param.update({"id": str(self.r.get('cardNum'),encoding='utf8')})
         self.r.set("pfa_serviceSn",param['serviceSn'])
         if len(data[0]['headers']) == 0:
             headers = None
@@ -211,9 +204,9 @@ class credit_apply(unittest.TestCase):
     def test_8_pfa_query(self):
         '''放款结果查询'''
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
-        data = excel_table_byname(excel, 'project_loan')
+        data = excel_table_byname(excel, 'pfa_query')
         param = json.loads(data[0]['param'])
-        param.update({"serviceSn": self.r.get('pfa_serviceSn')})
+        param.update({"serviceSn": str(self.r.get('pfa_serviceSn'),encoding='utf8')})
         if len(data[0]['headers']) == 0:
             headers = None
         else:
