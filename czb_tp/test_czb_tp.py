@@ -216,5 +216,35 @@ class credit_apply(unittest.TestCase):
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
+    def test_9_query_repaymentplan(self):
+        '''还款计划查询'''
+        excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
+        data = excel_table_byname(excel, 'repayment_plan')
+        param = json.loads(data[0]['param'])
+        param.update({"projectId": str(self.r.get('projectId'), encoding='utf8')})
+        if len(data[0]['headers']) == 0:
+            headers = None
+        else:
+            headers = json.loads(data[0]['headers'])
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+                               param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+        print("返回信息:%s" % rep.text)
+        self.logger.info("返回信息:%s" % rep.text)
+
+    def test_10_pre_clear_calculate(self):
+        '''提前结清试算'''
+        excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
+        data = excel_table_byname(excel, 'pre_clear_calculate')
+        param = json.loads(data[0]['param'])
+        param.update({"projectId": str(self.r.get('projectId'), encoding='utf8')})
+        if len(data[0]['headers']) == 0:
+            headers = None
+        else:
+            headers = json.loads(data[0]['headers'])
+        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+                               param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+        print("返回信息:%s" % rep.text)
+        self.logger.info("返回信息:%s" % rep.text)
+
 if __name__ == '__main__':
     unittest.main()
