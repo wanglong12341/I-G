@@ -246,9 +246,9 @@ class credit_apply(unittest.TestCase):
         print("返回信息:%s" % rep.text)
         self.logger.info("返回信息:%s" % rep.text)
 
-    # @unittest.skip(reason="跳过还款用例")
+    @unittest.skip(reason="跳过还款用例")
     def test_B_repay(self):
-        '''还款确认'''
+        """还款确认"""
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
         data = excel_table_byname(excel, 'repay')
         param = json.loads(data[0]['param'])
