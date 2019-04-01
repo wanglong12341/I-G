@@ -13,6 +13,8 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname
 from config.configer import Config
 
+logger = Logger(logger="contract_sign").getlog()
+
 
 @ddt.ddt
 class contract_sign(unittest.TestCase):
@@ -21,7 +23,6 @@ class contract_sign(unittest.TestCase):
 
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="contract_sign").getlog()
 		self.data = self.cm.get_json_data('chezhibao_contract_sign.json')
 
 	def tearDown(self):
@@ -38,7 +39,7 @@ class contract_sign(unittest.TestCase):
 		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("响应结果:%s" % rep)
 		print("返回信息:%s" % rep.text)
-		self.logger.info("返回信息:%s" % rep.text)
+		logger.info("返回信息:%s" % rep.text)
 		self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 
 

@@ -13,6 +13,8 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname
 from config.configer import Config
 
+logger = Logger(logger="pfa_query").getlog()
+
 
 @ddt.ddt
 class pfa_query(unittest.TestCase):
@@ -21,7 +23,6 @@ class pfa_query(unittest.TestCase):
 
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="pfa_query").getlog()
 
 	def tearDown(self):
 		pass
@@ -37,7 +38,7 @@ class pfa_query(unittest.TestCase):
 		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("响应结果:%s" % rep)
 		print("返回信息:%s" % rep.text)
-		self.logger.info("返回信息:%s" % rep.text)
+		logger.info("返回信息:%s" % rep.text)
 		self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 
 

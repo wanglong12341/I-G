@@ -13,12 +13,13 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname, get_borrowser
 from config.configer import Config
 
+logger = Logger(logger="test_czb_tp").getlog()
+
 
 class credit_apply(unittest.TestCase):
 
     def setUp(self):
         self.cm = Common()
-        self.logger = Logger(logger="credit_apply_data").getlog()
         self.r = self.cm.conn_redis()
 
     def tearDown(self):
@@ -53,7 +54,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
         creditId = json.loads(rep.text)['content']['creditId']
         userId = json.loads(rep.text)['content']['userId']
         self.r.mset({"creditId":creditId,"userId":userId})
@@ -64,6 +65,9 @@ class credit_apply(unittest.TestCase):
         print("phone:%s" % self.r.get('phone'))
         print("cardNum:%s" % self.r.get('cardNum'))
         print("custName:%s" % str(self.r.get('custName'),encoding='utf8'))
+        logger.info("phone:%s" % self.r.get('phone'))
+        logger.info("cardNum:%s" % self.r.get('cardNum'))
+        logger.info("custName:%s" % str(self.r.get('custName'),encoding='utf8'))
 
     def test_1_query_result(self):
         '''授信结果查询'''
@@ -79,7 +83,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_2_query_user_amount(self):
         '''用户额度查询'''
@@ -95,7 +99,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_3_sign_credit(self):
         '''上传授信协议'''
@@ -115,7 +119,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_4_project_apply(self):
         '''进件'''
@@ -158,7 +162,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_6_contract_sign(self):
         '''上传借款合同'''
@@ -178,7 +182,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_7_pfa(self):
         '''放款'''
@@ -198,7 +202,7 @@ class credit_apply(unittest.TestCase):
             headers = json.loads(data[0]['headers'])
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
 
     def test_8_pfa_query(self):
@@ -215,7 +219,7 @@ class credit_apply(unittest.TestCase):
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
                                param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_9_query_repaymentplan(self):
         '''还款计划查询'''
@@ -230,7 +234,7 @@ class credit_apply(unittest.TestCase):
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
                                param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     def test_A_pre_clear_calculate(self):
         '''提前结清试算'''
@@ -245,7 +249,7 @@ class credit_apply(unittest.TestCase):
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
                                param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
     @unittest.skip(reason="跳过还款用例")
     def test_B_repay(self):
@@ -263,7 +267,7 @@ class credit_apply(unittest.TestCase):
         rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
                                param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
         print("返回信息:%s" % rep.text)
-        self.logger.info("返回信息:%s" % rep.text)
+        logger.info("返回信息:%s" % rep.text)
 
 
 if __name__ == '__main__':
