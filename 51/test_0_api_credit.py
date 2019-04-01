@@ -6,27 +6,31 @@
 @describe:额度授信接口
 """
 
-import unittest,os,json
+import unittest, os, json
 import ddt
 from common.common_func import Common
+from common.common_func import failrun
 from log.logger import Logger
-from common.openExcel import excel_table_byname,get_borrowser
+from common.openExcel import excel_table_byname, get_borrowser
 from config.configer import Config
+
+logger = Logger(logger="api_credit").getlog()
+
 
 @ddt.ddt
 class api_credit(unittest.TestCase):
-	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File','51_case_file')
+	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', '51_case_file')
 	excel_data = excel_table_byname(excel, 'api_credit')
+
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="api_credit").getlog()
 
 	def tearDown(self):
 		pass
 
 	@ddt.data(*excel_data)
-	def test_api_credit(self,data):
-		print("接口名称:%s"%data['casename'])
+	def test_api_credit(self, data):
+		print("接口名称:%s" % data['casename'])
 		if data['yn'] == 'Y' or 'y':
 			borrowser = get_borrowser()
 			param = json.loads(data[0]['param'])
@@ -37,15 +41,17 @@ class api_credit(unittest.TestCase):
 			param['requestBody'].update({"fullName": borrowser['name']})
 			param['requestBody'].update({"cardId": borrowser['idcard']})
 			param['requestBody'].update({"mobile": self.cm.get_random('phone')})
-			param =data['param']
+			param = data['param']
 			if len(data['headers']) == 0:
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'],headers=headers,product='51',param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
-			print("返回信息:%s"%rep.text)
-			self.logger.info("返回信息:%s" % rep.text)
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers, product='51',
+								   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+			print("返回信息:%s" % rep.text)
+			logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(str(json.loads(rep.text)['msgCode']), data['msgCode'], '返回code不一致')
+
 
 if __name__ == '__main__':
 	unittest.main()

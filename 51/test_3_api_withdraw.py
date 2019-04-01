@@ -13,6 +13,8 @@ from log.logger import Logger
 from common.openExcel import excel_table_byname
 from config.configer import Config
 
+logger = Logger(logger="api_withdraw").getlog()
+
 
 @ddt.ddt
 class api_withdraw(unittest.TestCase):
@@ -21,7 +23,6 @@ class api_withdraw(unittest.TestCase):
 
 	def setUp(self):
 		self.cm = Common()
-		self.logger = Logger(logger="api_withdraw").getlog()
 
 	def tearDown(self):
 		pass
@@ -36,7 +37,7 @@ class api_withdraw(unittest.TestCase):
 			headers = json.loads(data['headers'])
 		rep = self.cm.Response(faceaddr=data['url'], headers=headers, product='51', param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
-		self.logger.info("返回信息:%s" % rep.text)
+		logger.info("返回信息:%s" % rep.text)
 		self.assertEqual(str(json.loads(rep.text)['msgCode']), data['msgCode'], '返回code不一致')
 
 
