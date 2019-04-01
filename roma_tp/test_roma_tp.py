@@ -222,6 +222,7 @@ class roma_tp(unittest.TestCase):
 
     def test_9_query_repaymentplan(self):
         '''还款计划查询'''
+        time.sleep(10)
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'roma_case_file')
         data = excel_table_byname(excel, 'repayment_plan')
         param = json.loads(data[0]['param'])
