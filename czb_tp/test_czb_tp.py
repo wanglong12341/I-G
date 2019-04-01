@@ -7,7 +7,6 @@
 """
 
 import unittest, os, json,time
-import ddt
 from common.common_func import Common
 from log.logger import Logger
 from common.openExcel import excel_table_byname, get_borrowser
