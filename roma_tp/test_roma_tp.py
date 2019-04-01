@@ -168,7 +168,7 @@ class roma_tp(unittest.TestCase):
         excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'roma_case_file')
         data = excel_table_byname(excel, 'contract_sign')
         print("接口名称:%s" % data[0]['casename'])
-        param = self.cm.get_json_data('chezhibao_contract_sign.json')
+        param = self.cm.get_json_data('roma_contract_sign.json')
         param.update({"serviceSn": self.cm.get_random('serviceSn')})
         param.update({"sourceUserId": str(self.r.get('roma_sourceUserId'),encoding='utf8')})
         param.update({"contractType": 2})
@@ -204,21 +204,21 @@ class roma_tp(unittest.TestCase):
         logger.info("返回信息:%s" % rep.text)
 
 
-    def test_8_pfa_query(self):
-        '''放款结果查询'''
-        time.sleep(10)
-        excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'roma_case_file')
-        data = excel_table_byname(excel, 'pfa_query')
-        param = json.loads(data[0]['param'])
-        param.update({"serviceSn": str(self.r.get('roma_pfa_serviceSn'),encoding='utf8')})
-        if len(data[0]['headers']) == 0:
-            headers = None
-        else:
-            headers = json.loads(data[0]['headers'])
-        rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
-                               param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
-        print("返回信息:%s" % rep.text)
-        logger.info("返回信息:%s" % rep.text)
+    # def test_8_pfa_query(self):
+    #     '''放款结果查询'''
+    #     time.sleep(10)
+    #     excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'roma_case_file')
+    #     data = excel_table_byname(excel, 'pfa_query')
+    #     param = json.loads(data[0]['param'])
+    #     param.update({"serviceSn": str(self.r.get('roma_pfa_serviceSn'),encoding='utf8')})
+    #     if len(data[0]['headers']) == 0:
+    #         headers = None
+    #     else:
+    #         headers = json.loads(data[0]['headers'])
+    #     rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+    #                            param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+    #     print("返回信息:%s" % rep.text)
+    #     logger.info("返回信息:%s" % rep.text)
 
     def test_9_query_repaymentplan(self):
         '''还款计划查询'''
