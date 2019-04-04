@@ -19,7 +19,7 @@ quota = []
 rule_list = []
 hit_category = []
 pa = []
-for i in range(0,len(data)):
+for i in range(1,len(data)):
 	if data[i]['性别'] == 'M':
 		sex = 1
 	else:
@@ -73,7 +73,7 @@ for i in range(0,len(data)):
 	# 		"province":"北京"
 	# 		}
 	# 	}
-	#http://39.105.152.212:8082/decision/sync/get    http://39.107.115.172:8082/decision/sync/get
+	#百融测试http://39.105.152.212:8082/decision/sync/get    百融正式http://39.107.115.172:8082/decision/sync/get
 	re = requests.post(url="http://39.105.152.212:8082/decision/sync/get",headers=header,data=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 	print(param)
 	rep = json.loads(re.text)
