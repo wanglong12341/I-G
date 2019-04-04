@@ -18,7 +18,8 @@ score = []
 quota = []
 rule_list = []
 hit_category = []
-for i in range(0,11):
+pa = []
+for i in range(0,len(data)):
 	if data[i]['性别'] == 'M':
 		sex = 1
 	else:
@@ -72,8 +73,8 @@ for i in range(0,11):
 	# 		"province":"北京"
 	# 		}
 	# 	}
-	#http://39.105.152.212:8082/decision/sync/get
-	re = requests.post(url="http://39.107.115.172:8082/decision/sync/get",headers=header,data=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+	#http://39.105.152.212:8082/decision/sync/get    http://39.107.115.172:8082/decision/sync/get
+	re = requests.post(url="http://39.105.152.212:8082/decision/sync/get",headers=header,data=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 	print(param)
 	rep = json.loads(re.text)
 	resu = rep['decisionResult']['result']
@@ -91,10 +92,11 @@ for i in range(0,11):
 	quota.append(qu)
 	rule_list.append(rl)
 	hit_category.append(hc)
+	pa.append(str(param))
 	print(resu,score,quota,rule_list,hit_category)
 workbook = xlwt.Workbook(encoding='utf-8')
 worksheet = workbook.add_sheet('Sheet1', cell_overwrite_ok=False)
-title = ['姓名','身份证号','分数', '额度','命中欺诈规则','命中欺诈类型','风控结果']
+title = ['姓名','身份证号','分数', '额度','命中欺诈规则','命中欺诈类型','风控结果','请求数据']
 for n in range(0, len(title)):
 	worksheet.write(0, n, title[n])
 for n in range(0, len(name)):
@@ -111,4 +113,6 @@ for n in range(len(hit_category)):
 	worksheet.write(n + 1, 5, hit_category[n])
 for n in range(len(result)):
 	worksheet.write(n + 1, 6, result[n])
+for n in range(len(pa)):
+	worksheet.write(n + 1, 7, pa[n])
 workbook.save(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/data/xindalu.xls')
