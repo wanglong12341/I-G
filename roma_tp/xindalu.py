@@ -7,6 +7,7 @@
 '''
 import sys
 import os
+import time
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
@@ -33,6 +34,23 @@ def dl():
 			province = '0'
 		else:
 			province = '1'
+		purchaseQuantity =round(int(data[i]['车置宝平台交易总笔数'])/(round((data[i]['车置宝平台注册天数'])/365,1)))
+		totalAmt = round(float(data[i]['车置宝平台交易总金额'])/round((data[i]['车置宝平台注册天数'])/365,1))
+		day1 = time.strptime(str(data[i]['首次授信时间']).split(' ')[0], '%Y-%m-%d')
+		now = time.strftime("%Y-%m-%d",time.localtime())
+		day2 = time.strptime(now, '%Y-%m-%d')
+		day_num = str(round(((int(time.mktime(day2)) - int(time.mktime(day1))) / (
+					24 * 60 * 60)/365),1))
+		if int(data[i]['车位数']) == 0:
+			cws = 3
+		elif int(data[i]['车位数']) == 1:
+			cws = 8
+		elif int(data[i]['车位数']) == 2:
+			cws = 15
+		elif int(data[i]['车位数']) == 3:
+			cws = 25
+		elif int(data[i]['车位数']) == 4:
+			cws = 35
 		param = {
 			"productCode":"00120181119435572",
 			"requestParam":{
@@ -40,17 +58,19 @@ def dl():
 				"id_card":data[i]['身份证号码'],
 				"phone_no":str(int(data[i]['手机号码'])),
 				"age":str(int(data[i]['年龄'])),
-				"sex":sex,
+				"sex":sex,#性别
 				"maritalStatus":str(int(data[i]['婚姻状况'])),
 				"hasChildern":str(int(data[i]['是否有子女'])),
 				"liveStatus":str(int(data[i]['是否购房'])),
 				"manageTime":str(int(data[i]['经营年限'])),
 				"employeeNum":int(data[i]['员工数目']),
-				"stallNum":int(data[i]['车位数']),
+				"stallNum":cws,#车位数
 				"disburseNum":str(int(data[i]['累计借款次数'])),
-				"province":province,
+				"province":province,#经营地区
 				"avgAmt":data[i]['车置宝平台交易平均车价'],
-				"totalAmt":data[i]['车置宝平台交易总金额']
+				"purchaseQuantity":purchaseQuantity,#年车采购量
+				"totalAmt":totalAmt,#总额
+				"creditYears":day_num#平均额
 			}
 		}
 		print(param)

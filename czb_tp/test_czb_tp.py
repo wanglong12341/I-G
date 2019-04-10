@@ -29,8 +29,7 @@ class credit_apply(unittest.TestCase):
 		excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
 		data = excel_table_byname(excel, 'credit_apply_data')
 		print("接口名称:%s" % data[0]['casename'])
-		person = get_borrowser()
-		self.r.mset({"custName": person['name'], "cardNum": person['idcard']})
+		self.cm.p2p_get_userinfo('czb')
 		self.r.mset(
 			{"sourceUserId": self.cm.get_random('userid'),
 			 "transactionId": self.cm.get_random('transactionId'),
@@ -178,6 +177,48 @@ class credit_apply(unittest.TestCase):
 		param.update({"serviceSn": self.cm.get_random('serviceSn')})
 		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
 		param.update({"contractType": 2})
+		param.update({"sourceContractId": self.cm.get_random('userid')})
+		param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
+		param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
+		if len(data[0]['headers']) == 0:
+			headers = None
+		else:
+			headers = json.loads(data[0]['headers'])
+		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+		print("返回信息:%s" % rep.text)
+		logger.info("返回信息:%s" % rep.text)
+
+	def test_61_contract_sign(self):
+		'''上传车辆交易单'''
+		excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
+		data = excel_table_byname(excel, 'contract_sign')
+		print("接口名称:%s" % data[0]['casename'])
+		param = self.cm.get_json_data('chezhibao_contract_sign.json')
+		param.update({"serviceSn": self.cm.get_random('serviceSn')})
+		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
+		param.update({"contractType": 3})
+		param.update({"sourceContractId": self.cm.get_random('userid')})
+		param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
+		param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
+		if len(data[0]['headers']) == 0:
+			headers = None
+		else:
+			headers = json.loads(data[0]['headers'])
+		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
+							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
+		print("返回信息:%s" % rep.text)
+		logger.info("返回信息:%s" % rep.text)
+
+	def test_62_contract_sign(self):
+		'''上传车辆收购合同'''
+		excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'czb_case_file')
+		data = excel_table_byname(excel, 'contract_sign')
+		print("接口名称:%s" % data[0]['casename'])
+		param = self.cm.get_json_data('chezhibao_contract_sign.json')
+		param.update({"serviceSn": self.cm.get_random('serviceSn')})
+		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
+		param.update({"contractType": 4})
 		param.update({"sourceContractId": self.cm.get_random('userid')})
 		param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
 		param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})

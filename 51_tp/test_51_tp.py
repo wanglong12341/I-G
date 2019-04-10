@@ -31,8 +31,8 @@ class tp(unittest.TestCase):
 		data = excel_table_byname(excel, 'api_credit')
 		borrowser = get_borrowser()
 		print("接口名称:%s" % data[0]['casename'])
-		self.r.mset({"fullName": borrowser['name'],
-					 "cardId": borrowser['idcard'],
+		self.cm.p2p_get_userinfo('51')
+		self.r.mset({
 					 "mobile": self.cm.get_random('phone'),
 					 "creditApplyNo": self.cm.get_random('transactionId'),
 					 "productId": self.cm.get_random('sourceProjectId')
