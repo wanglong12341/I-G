@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-import xlrd,os
+import xlrd,os,sys
 from common.common_func import Common
+
 
 def open_excel(file):
 	try:

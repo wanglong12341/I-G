@@ -6,7 +6,8 @@
 @describe:罗马车贷业务流程接口
 """
 
-import unittest, os, json,time
+import unittest, os, json,time,sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from common.common_func import Common
 from log.logger import Logger
 from common.openExcel import excel_table_byname, get_borrowser

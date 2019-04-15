@@ -6,11 +6,13 @@
 @describe:车置宝业务流程接口
 """
 
-import unittest, os, json, time
+import unittest, os, json, time,sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from common.common_func import Common
 from log.logger import Logger
-from common.openExcel import excel_table_byname, get_borrowser
+from common.openExcel import excel_table_byname
 from config.configer import Config
+
 
 logger = Logger(logger="test_czb_tp").getlog()
 
@@ -67,6 +69,7 @@ class credit_apply(unittest.TestCase):
 		logger.info("phone:%s" % self.r.get('phone'))
 		logger.info("cardNum:%s" % self.r.get('cardNum'))
 		logger.info("custName:%s" % str(self.r.get('custName'), encoding='utf8'))
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
 
 	def test_1_query_result(self):
 		'''授信结果查询'''
@@ -84,6 +87,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_2_query_user_amount(self):
 		'''用户额度查询'''
@@ -101,6 +106,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_3_sign_credit(self):
 		'''上传授信协议'''
@@ -122,6 +129,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_4_project_apply(self):
 		'''进件'''
@@ -149,6 +158,8 @@ class credit_apply(unittest.TestCase):
 		self.r.set('projectId', projectId)
 		print("projectId:%s" % self.r.get('projectId'))
 		print("sourceProjectId:%s" % self.r.get('sourceProjectId'))
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_5_query_apply_result(self):
 		'''进件结果查询'''
@@ -167,6 +178,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_6_contract_sign(self):
 		'''上传借款合同'''
@@ -174,12 +187,12 @@ class credit_apply(unittest.TestCase):
 		data = excel_table_byname(excel, 'contract_sign')
 		print("接口名称:%s" % data[0]['casename'])
 		param = self.cm.get_json_data('chezhibao_contract_sign.json')
-		param.update({"serviceSn": self.cm.get_random('serviceSn')})
-		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
+		# param.update({"serviceSn": self.cm.get_random('serviceSn')})
+		# param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
 		param.update({"contractType": 2})
-		param.update({"sourceContractId": self.cm.get_random('userid')})
-		param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
-		param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
+		# param.update({"sourceContractId": self.cm.get_random('userid')})
+		# param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
+		# param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
 		if len(data[0]['headers']) == 0:
 			headers = None
 		else:
@@ -188,6 +201,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_61_contract_sign(self):
 		'''上传车辆交易单'''
@@ -209,6 +224,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_62_contract_sign(self):
 		'''上传车辆收购合同'''
@@ -230,6 +247,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_7_pfa(self):
 		'''放款'''
@@ -251,6 +270,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_8_pfa_query(self):
 		'''放款结果查询'''
@@ -267,6 +288,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_9_query_repaymentplan(self):
 		'''还款计划查询'''
@@ -282,6 +305,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	def test_A_pre_clear_calculate(self):
 		'''提前结清试算'''
@@ -297,6 +322,8 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
+
 
 	@unittest.skip(reason="跳过还款用例")
 	def test_B_repay(self):
@@ -316,6 +343,7 @@ class credit_apply(unittest.TestCase):
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'))
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
+		self.assertEqual(json.loads(rep.text)['resultCode'],int(data[0]['resultCode']))
 
 
 if __name__ == '__main__':
