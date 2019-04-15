@@ -10,7 +10,7 @@ import unittest, os, json
 import ddt
 from common.common_func import Common
 from log.logger import Logger
-from common.openExcel import excel_table_byname,get_borrowser
+from common.open_excel import excel_table_byname,get_borrowser
 from config.configer import Config
 
 logger = Logger(logger="credit_apply").getlog()

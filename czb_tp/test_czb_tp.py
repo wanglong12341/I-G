@@ -10,7 +10,7 @@ import unittest, os, json, time,sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from common.common_func import Common
 from log.logger import Logger
-from common.openExcel import excel_table_byname
+from common.open_excel import excel_table_byname
 from config.configer import Config
 
 
@@ -187,12 +187,12 @@ class credit_apply(unittest.TestCase):
 		data = excel_table_byname(excel, 'contract_sign')
 		print("接口名称:%s" % data[0]['casename'])
 		param = self.cm.get_json_data('chezhibao_contract_sign.json')
-		# param.update({"serviceSn": self.cm.get_random('serviceSn')})
-		# param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
+		param.update({"serviceSn": self.cm.get_random('serviceSn')})
+		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
 		param.update({"contractType": 2})
-		# param.update({"sourceContractId": self.cm.get_random('userid')})
-		# param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
-		# param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
+		param.update({"sourceContractId": self.cm.get_random('userid')})
+		param.update({"transactionId": str(self.r.get('transactionId'), encoding='utf8')})
+		param.update({"associationId": str(self.r.get('projectId'), encoding='utf8')})
 		if len(data[0]['headers']) == 0:
 			headers = None
 		else:

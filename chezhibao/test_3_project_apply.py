@@ -10,7 +10,7 @@ import unittest, os, json
 import ddt
 from common.common_func import Common
 from log.logger import Logger
-from common.openExcel import excel_table_byname
+from common.open_excel import excel_table_byname
 from config.configer import Config
 
 logger = Logger(logger="test_project").getlog()

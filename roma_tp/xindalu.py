@@ -12,7 +12,7 @@ curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 import json,requests,xlwt,os
-from common.openExcel import excel_table_byname
+from common.open_excel import excel_table_byname
 from config.configer import Config
 def dl():
 	excel = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + Config().Get_Item('File', 'xindalu')

@@ -9,7 +9,7 @@
 import unittest, os, json, time,sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from common.common_func import Common
-from common.openExcel import excel_table_byname
+from common.open_excel import excel_table_byname
 from config.configer import Config
 from urllib import parse
 from selenium import webdriver
