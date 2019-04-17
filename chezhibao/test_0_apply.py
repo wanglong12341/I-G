@@ -33,8 +33,9 @@ class credit_apply(unittest.TestCase):
 		param = json.loads(data['param'])
 		if data['yn'] == 'Y' or 'y' :
 			person = get_borrowser()
-			param['personalInfo'].update({"cardNum": person['idcard']})
-			param['personalInfo'].update({"custName": person['name']})
+			self.cm.p2p_get_userinfo('czb')
+			param['personalInfo'].update({"cardNum": str(self.r.get('cardNum'), encoding='utf8')})
+			param['personalInfo'].update({"custName": str(self.r.get('custName').decode())})
 			param['personalInfo'].update({"phone": self.cm.get_random('phone')})
 			param['applyInfo'].update({"applyTime": self.cm.get_time()})
 			param['riskSuggestion'].update({"firstCreditDate": self.cm.get_time('-')})

@@ -92,4 +92,4 @@ if __name__ == "__main__":
 	runner.run(all_case(sys.argv[1]))
 	fp.close()
 	new_report = newreport(os.getcwd() + "./test_report")
-	# sendreport(new_report)#调用发送报告函数
+	sendreport(new_report)#调用发送报告函数
