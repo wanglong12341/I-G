@@ -81,21 +81,15 @@ def set_driver(system):
 	else:
 		raise Exception("不支持该系统设置driver")
 
-def environment(env='dev'):
-	'''开发环境dev 测试环境test'''
-	return env
-
-
 if __name__ == "__main__":
 	# dir = input("dir:")
 	# system = input("system:")
 	newtime = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
 	filename = "./test_report/" + newtime + '.html'
 	set_driver(sys.argv[2])
-	environment(sys.argv[3])
 	fp = open(filename, 'wb+')
 	runner = HTMLTestRunner(stream=fp, title='中投保接口报告', description='执行情况')
 	runner.run(all_case(sys.argv[1]))
 	fp.close()
-	new_report = newreport(os.getcwd() + "./test_report")
+	new_report = newreport(os.getcwd() + "/test_report")
 	sendreport(new_report)#调用发送报告函数

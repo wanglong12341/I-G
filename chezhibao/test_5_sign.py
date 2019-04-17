@@ -6,7 +6,7 @@
 @describe:合同传输接口
 """
 
-import unittest, os, json
+import unittest, os, json, sys
 import ddt
 from common.common_func import Common
 from log.logger import Logger
@@ -24,6 +24,7 @@ class contract_sign(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.data = self.cm.get_json_data('chezhibao_contract_sign.json')
+		self.env = sys.argv[3]
 
 	def tearDown(self):
 		pass
@@ -36,7 +37,8 @@ class contract_sign(unittest.TestCase):
 			headers = None
 		else:
 			headers = json.loads(data['headers'])
-		rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
+		rep = self.cm.Response(faceaddr=data['url'], headers=headers,
+							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), environment=self.env)
 		print("响应结果:%s" % rep)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)

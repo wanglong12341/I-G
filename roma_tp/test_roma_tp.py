@@ -13,7 +13,6 @@ from common.common_func import Common
 from log.logger import Logger
 from common.open_excel import excel_table_byname, get_borrowser
 from config.configer import Config
-from run_all_case import environment as env
 
 logger = Logger(logger="test_roma_tp").getlog()
 
@@ -23,6 +22,7 @@ class roma_tp(unittest.TestCase):
 	def setUp(self):
 		self.cm = Common()
 		self.r = self.cm.conn_redis()
+		self.env = sys.argv[3]
 
 	def tearDown(self):
 		pass
@@ -65,7 +65,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 		creditId = json.loads(rep.text)['content']['creditId']
@@ -89,7 +89,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -108,7 +108,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -131,7 +131,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -157,7 +157,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		projectId = json.loads(rep.text)['content']['projectId']
 		self.r.set('roma_projectId', projectId)
@@ -180,7 +180,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -203,7 +203,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -226,7 +226,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -260,7 +260,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -277,7 +277,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 
@@ -298,7 +298,7 @@ class roma_tp(unittest.TestCase):
 			headers = json.loads(data[0]['headers'])
 		rep = self.cm.Response(faceaddr=data[0]['url'], headers=headers,
 							   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), product='roma',
-							   environment=env())
+							   environment=self.env)
 		print("返回信息:%s" % rep.text)
 		logger.info("返回信息:%s" % rep.text)
 

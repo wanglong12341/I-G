@@ -6,11 +6,11 @@
 @describe:额度授信接口
 """
 
-import unittest, os, json
+import unittest, os, json, sys
 import ddt
 from common.common_func import Common
 from log.logger import Logger
-from common.open_excel import excel_table_byname,get_borrowser
+from common.open_excel import excel_table_byname, get_borrowser
 from config.configer import Config
 
 logger = Logger(logger="credit_apply").getlog()
@@ -23,6 +23,7 @@ class credit_apply(unittest.TestCase):
 
 	def setUp(self):
 		self.cm = Common()
+		self.env = sys.argv[3]
 
 	def tearDown(self):
 		pass
@@ -31,8 +32,7 @@ class credit_apply(unittest.TestCase):
 	def test_credit_apply(self, data):
 		print("接口名称:%s" % data['casename'])
 		param = json.loads(data['param'])
-		if data['yn'] == 'Y' or 'y' :
-			person = get_borrowser()
+		if data['yn'] == 'Y' or 'y':
 			self.cm.p2p_get_userinfo('czb')
 			param['personalInfo'].update({"cardNum": str(self.r.get('cardNum'), encoding='utf8')})
 			param['personalInfo'].update({"custName": str(self.r.get('custName').decode())})
@@ -46,21 +46,25 @@ class credit_apply(unittest.TestCase):
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
-			print("响应结果:%s"%rep)
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers,
+								   param=json.dumps(param, ensure_ascii=False).encode('utf-8'),
+								   environment=self.env)
+			print("响应结果:%s" % rep)
 			print("返回信息:%s" % rep.text)
 			logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
 		else:
-			param['applyInfo'].update({"applyTime":self.cm.get_time('-')})
+			param['applyInfo'].update({"applyTime": self.cm.get_time('-')})
 			if len(data['headers']) == 0:
 				headers = None
 			else:
 				headers = json.loads(data['headers'])
-			rep = self.cm.Response(faceaddr=data['url'], headers=headers, param=json.dumps(param,ensure_ascii=False).encode('utf-8'))
+			rep = self.cm.Response(faceaddr=data['url'], headers=headers,
+								   param=json.dumps(param, ensure_ascii=False).encode('utf-8'), environment=self.env)
 			print("返回信息:%s" % rep.text)
 			logger.info("返回信息:%s" % rep.text)
 			self.assertEqual(str(json.loads(rep.text)['resultCode']), data['resultCode'])
+
 
 if __name__ == '__main__':
 	unittest.main()
