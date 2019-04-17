@@ -33,8 +33,7 @@ class roma_tp(unittest.TestCase):
 																								'roma_case_file')
 		data = excel_table_byname(excel, 'credit_apply_data')
 		print("接口名称:%s" % data[0]['casename'])
-		person = get_borrowser()
-		self.r.mset({"roma_custName": person['name'], "roma_cardNum": person['idcard']})
+		self.cm.p2p_get_userinfo('roma')
 		self.r.mset(
 			{"roma_sourceUserId": self.cm.get_random('userid'),
 			 "roma_transactionId": self.cm.get_random('transactionId'),
