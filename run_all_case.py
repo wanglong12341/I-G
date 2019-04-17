@@ -27,6 +27,12 @@ def all_case(dir):
 	elif dir == '51_tp':
 		case_dir = "./51_tp"
 		logger.info("用例执行文件夹%s" % case_dir)
+	elif dir == 'roma_tp':
+		case_dir = "./roma_tp"
+		logger.info("用例执行文件夹%s" % case_dir)
+	elif dir == 'krb_tp':
+		case_dir = "./krb_tp"
+		logger.info("用例执行文件夹%s" % case_dir)
 	testcase = unittest.TestSuite()
 	discover = unittest.defaultTestLoader.discover(case_dir, pattern="test_*.py", top_level_dir=None)
 

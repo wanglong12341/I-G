@@ -38,7 +38,7 @@ class krb_test(unittest.TestCase):
 		params = parse.urlencode(param)
 		headers = json.loads(data[0]['headers'])
 		rep = self.cm.form_request(faceaddr=data[0]['url'], headers=headers,
-								   param=params, product='krb')
+								   param=params, product='krb',enviroment=self.env)
 		print("返回信息:%s" % rep.text)
 		self.r.set("krb_customerId", json.loads(rep.text)['responseData']['customerId'])
 
@@ -60,7 +60,7 @@ class krb_test(unittest.TestCase):
 		params = parse.urlencode(param)
 		headers = json.loads(data[0]['headers'])
 		rep = self.cm.form_request(faceaddr=data[0]['url'], headers=headers,
-								   param=params, product='krb')
+								   param=params, product='krb',enviroment=self.env)
 		print("返回信息:%s" % rep.text)
 
 	def test_2_personal_regist_expand(self):
@@ -79,7 +79,7 @@ class krb_test(unittest.TestCase):
 		params = parse.urlencode(param)
 		headers = json.loads(data[0]['headers'])
 		rep = self.cm.form_request(faceaddr=data[0]['url'], headers=headers,
-								   param=params, product='krb')
+								   param=params, product='krb',enviroment=self.env)
 		with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/data/resig.html', 'w',
 				  encoding='utf-8') as f:
 			f.write(rep.text)
@@ -135,7 +135,7 @@ class krb_test(unittest.TestCase):
 		params = parse.urlencode(param)
 		headers = json.loads(data[0]['headers'])
 		rep = self.cm.form_request(faceaddr=data[0]['url'], headers=headers,
-								   param=params, product='krb')
+								   param=params, product='krb',enviroment=self.env)
 		print("返回信息:%s" % rep.text)
 		self.r.set("krb_itemId",json.loads(rep.text)['responseData']['itemId'])
 
@@ -153,7 +153,7 @@ class krb_test(unittest.TestCase):
 		params = parse.urlencode(param)
 		headers = json.loads(data[0]['headers'])
 		rep = self.cm.form_request(faceaddr=data[0]['url'], headers=headers,
-								   param=params, product='krb')
+								   param=params, product='krb',enviroment=self.env)
 		print("返回信息:%s" % rep.text)
 		with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/data/repayment.html', 'w',
 				  encoding='utf-8') as f:
