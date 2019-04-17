@@ -8,7 +8,7 @@ class Config():
 	"""配置文件常用功能封装"""
 	def __init__(self):
 		self.cf = configparser.ConfigParser()
-		self.cf.read(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini")
+		self.cf.read(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini",encoding='utf-8')
 
 	"""获取参数值"""
 	def Get_Item(self,section,option):
@@ -18,7 +18,7 @@ class Config():
 	def Set_Item(self,section,option,value=None):
 		try:
 			self.cf.set(section,option,value)
-			with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini", "w+") as f:
+			with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini", "w+",encoding='utf-8') as f:
 				self.cf.write(f)
 			f.close()
 			return "修改成功"
@@ -29,7 +29,7 @@ class Config():
 	def Add_Section(self,section):
 		try:
 			self.cf.add_section(section)
-			with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini", "w+") as f:
+			with open(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/config/config.ini", "w+",encoding='utf-8') as f:
 				self.cf.write(f)
 			f.close()
 			return "添加成功"
