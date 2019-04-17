@@ -23,6 +23,7 @@ class credit_apply(unittest.TestCase):
 
 	def setUp(self):
 		self.cm = Common()
+		self.r = self.cm.conn_redis()
 		self.env = sys.argv[3]
 
 	def tearDown(self):
