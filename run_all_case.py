@@ -54,18 +54,18 @@ def sendreport(file_new):
 	if sys.argv[1] == 'chezhibao' or sys.argv[1] == 'czb_tp':
 		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com'
 		if sys.argv[3] == 'dev':
-			msg['Subject'] = Header('报告-SAAS-{车置宝dev}', 'utf8')
+			msg['Subject'] = Header('报告-SAAS-车置宝dev', 'utf8')
 		elif sys.argv[3] == 'test':
-			msg['Subject'] = Header('报告-SAAS-{车置宝test}', 'utf8')
+			msg['Subject'] = Header('报告-SAAS-车置宝test', 'utf8')
 	elif sys.argv[1] == 'roma' or sys.argv[1] == 'roma_tp':
 		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com'
 		if sys.argv[3] == 'dev':
-			msg['Subject'] = Header('报告-SAAS-{罗马车贷dev}', 'utf8')
+			msg['Subject'] = Header('报告-SAAS-罗马车贷dev', 'utf8')
 		elif sys.argv[3] == 'test':
-			msg['Subject'] = Header('报告-SAAS-{罗马车贷test}', 'utf8')
+			msg['Subject'] = Header('报告-SAAS-罗马车贷test', 'utf8')
 	elif sys.argv[1] == 'krb' or sys.argv == 'krb_tp':
 		msg['CC'] = 'wangxl@cloudloan.com'
-		msg['Subject'] = Header('报告-P2P-{快融保P2Ptest}', 'utf8')
+		msg['Subject'] = Header('报告-P2P-快融保P2Ptest', 'utf8')
 	else:
 		msg['Subject'] = Header('中投保报告', 'utf8')
 		msg['CC'] = 'wangxl@cloudloan.com'
@@ -107,8 +107,6 @@ def set_driver(system):
 
 
 if __name__ == "__main__":
-	# dir = input("dir:")
-	# system = input("system:")
 	newtime = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime())
 	filename = "./test_report/" + newtime + '.html'
 	set_driver(sys.argv[2])
