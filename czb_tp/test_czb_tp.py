@@ -253,7 +253,7 @@ class credit_apply(unittest.TestCase):
 		param.update({"sourceUserId": str(self.r.get('sourceUserId'), encoding='utf8')})
 		param.update({"serviceSn": self.cm.get_random('serviceSn')})
 		# param.update({"accountName": self.r.get('custName').decode()})
-		param.update({"id": str(self.r.get('cardNum'), encoding='utf8')})
+		# param.update({"id": str(self.r.get('cardNum'), encoding='utf8')})
 		self.r.set("pfa_serviceSn", param['serviceSn'])
 		if len(data[0]['headers']) == 0:
 			headers = None
