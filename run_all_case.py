@@ -52,13 +52,13 @@ def sendreport(file_new):
 	msg['From'] = 'bxj3416162@163.com'
 	msg['To'] = 'buxiangjie@cloudloan.com'
 	if sys.argv[1] == 'chezhibao' or sys.argv[1] == 'czb_tp':
-		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com'
+		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com;zhangdawei@cloudloan.com'
 		if sys.argv[3] == 'dev':
 			msg['Subject'] = Header('报告-SAAS-车置宝dev', 'utf8')
 		elif sys.argv[3] == 'test':
 			msg['Subject'] = Header('报告-SAAS-车置宝test', 'utf8')
 	elif sys.argv[1] == 'roma' or sys.argv[1] == 'roma_tp':
-		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com'
+		msg['CC'] = 'wangxl@cloudloan.com;zhaochen@cloudloan.com;zhangdawei@cloudloan.com'
 		if sys.argv[3] == 'dev':
 			msg['Subject'] = Header('报告-SAAS-罗马车贷dev', 'utf8')
 		elif sys.argv[3] == 'test':
